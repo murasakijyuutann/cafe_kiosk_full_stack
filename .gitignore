@@ -1,0 +1,14 @@
+# Root level gitignore
+
+# IDE
+.vscode/
+.idea/
+*.iml
+*.iws
+.DS_Store
+
+# OS
+Thumbs.db
+
+# Logs
+*.log
