@@ -23,6 +23,12 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
         globally_quoted_identifiers: true
     show-sql: true
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always
+      encoding: UTF-8
 
   mvc:
     pathmatch:
