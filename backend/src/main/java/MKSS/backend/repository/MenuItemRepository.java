@@ -1,17 +1,19 @@
-package MKSS.backend.repository;
+package repository;
 
-import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import MKSS.backend.model.MenuItem;
+import entity.MenuItem;
+
+import java.util.List;
 
 @Repository
-public interface MenuItemRepository extends JpaRepository<MenuItem, Long>{
-	
-	List<MenuItem> findByCategoryIdAndAvaliableTrue(Long categoryId);
-	
-	List<MenuItem> findByAvaliableTrue();
+public interface MenuItemRepository extends JpaRepository<MenuItem, Long> {
 
+    // 카테고리별 사용 가능한 메뉴 조회
+    List<MenuItem> findByCategoryIdAndAvailableTrue(Long categoryId);
+
+    // 모든 사용 가능한 메뉴 조회
+    List<MenuItem> findByAvailableTrue();
 }
