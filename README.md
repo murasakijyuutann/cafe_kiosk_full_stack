@@ -164,27 +164,27 @@ npm run dev
 <th>브랜치</th>
 </tr>
 <tr>
-<td align="center">👤 <b>팀원 1</b></td>
+<td align="center">👤 <b>이재혁</b></td>
 <td>데이터베이스 계층 (Entity, Repository)</td>
 <td><code>feature/database</code></td>
 </tr>
 <tr>
-<td align="center">👤 <b>팀원 2</b></td>
+<td align="center">👤 <b>강태성</b></td>
 <td>비즈니스 로직 (Service, DTO)</td>
 <td><code>feature/service</code></td>
 </tr>
 <tr>
-<td align="center">👤 <b>팀원 3</b></td>
+<td align="center">👤 <b>우선명</b></td>
 <td>컨트롤러 (Controller, Exception)</td>
 <td><code>feature/controller</code></td>
 </tr>
 <tr>
-<td align="center">👤 <b>팀원 4</b></td>
+<td align="center">👤 <b>문수영</b></td>
 <td>프론트엔드 - 메뉴 페이지</td>
 <td><code>feature/frontend-menu</code></td>
 </tr>
 <tr>
-<td align="center">👤 <b>팀원 5</b></td>
+<td align="center">👤 <b>김성진</b></td>
 <td>프론트엔드 - 장바구니 & 주문</td>
 <td><code>feature/frontend-cart</code></td>
 </tr>
