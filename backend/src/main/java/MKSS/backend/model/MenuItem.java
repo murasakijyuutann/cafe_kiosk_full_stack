@@ -3,6 +3,8 @@ package MKSS.backend.model;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,7 +34,7 @@ public class MenuItem {
 	private BigDecimal price;
 	
 	@Column(name = "image_url", length=300)
-	private String imageurl;
+	private String imageUrl;
 	
 	@Column(nullable = false)
 	@Builder.Default
@@ -40,6 +42,7 @@ public class MenuItem {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id",nullable = false)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "menuItems"})
 	private Category category;
 	
 	@Column(name = "created_at", updatable = false)
@@ -49,7 +52,7 @@ public class MenuItem {
 	private LocalDateTime updatedAt;
 	
 	@PrePersist
-	protected void oncreat() {
+	protected void onCreate() {
 		createdAt = LocalDateTime.now();
 		updatedAt = LocalDateTime.now();
 	}

@@ -1,38 +1,39 @@
 package MKSS.backend.Controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import MKSS.backend.Service.MenuService;
 import MKSS.backend.model.Category;
+import MKSS.backend.model.MenuItem;
 import lombok.RequiredArgsConstructor;
 
-@Controller
+@RestController
 @RequestMapping("/menu")
 @RequiredArgsConstructor
 public class MenuController {
-	
+
+	private final MenuService menuService;
+
 	@GetMapping
-	public String viewMenu(
-			@RequestParam(required =false)Long categoryId,
-			Model model) {
-		
-		List<Category> category = menuService.getAllCategories();
+	public ResponseEntity<List<MenuItem>> getMenuItems(
+			@RequestParam(required = false) Long categoryId) {
+
 		List<MenuItem> menuItems;
-		
+
 		if(categoryId != null) {
-			menuItems= menuService.getMenuItemsByCategory(categoryId);
-		}else {
+			menuItems = menuService.getMenuItemsByCategory(categoryId);
+		} else {
 			menuItems = menuService.getAllAvailableMenuItems();
 		}
-	model.addAllAttributes("categories",categories);
-	model.addAllAttributes("menuItems",menuItems);
-	model.addAllAttributes("selectedCategoryId", categoryId);	
-	
-	return "menu";
+
+		return ResponseEntity.ok(menuItems);
 	}
 }

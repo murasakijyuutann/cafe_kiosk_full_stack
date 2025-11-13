@@ -1,8 +1,8 @@
-package repository;
+package MKSS.backend.repository;
 
 
-import entity.Order;
-import entity.OrderStatus;
+import MKSS.backend.model.Order;
+import MKSS.backend.model.OrderStatus;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

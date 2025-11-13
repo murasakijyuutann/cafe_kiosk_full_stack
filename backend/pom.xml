@@ -114,7 +114,7 @@
     </dependency>
 
     <!-- Flyway for DB migrations -->
-    <dependency>
+    <!-- <dependency>
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
     </dependency>
@@ -122,7 +122,7 @@
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-mysql</artifactId>
       <scope>runtime</scope>
-    </dependency>
+    </dependency> -->
 
     <!-- Dotenv for loading .env files -->
     <dependency>
@@ -137,25 +137,19 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+
+    <!-- WebJars -->
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>bootstrap</artifactId>
+      <version>5.3.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>webjars-locator</artifactId>
+      <version>0.52</version>
+    </dependency>
   </dependencies>
-
-  <dependency>
-    <groupId>me.paulschwarz</groupId>
-    <artifactId>spring-dotenv</artifactId>
-    <version>4.0.0</version>
-  </dependency>
-
-  <dependency>
-    <groupId>org.webjars</groupId>
-    <artifactId>bootstrap</artifactId>
-    <version>5.3.2</version>
-  </dependency>
-
-  <dependency>
-    <groupId>org.webjars</groupId>
-    <artifactId>webjars-locator</artifactId>
-    <version>0.52</version>
-  </dependency>
 
   <build>
     <plugins>

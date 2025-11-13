@@ -2,6 +2,7 @@ package MKSS.backend.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -22,7 +23,7 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "order_number", nullable = false, unique = ture,length = 20)
+	@Column(name = "order_number", nullable = false, unique = true,length = 20)
 	private String orderNumber;
 	
 	@Column(name = "customer_name",length = 100)

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe Kiosk API Tester</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .status.online {
+            background: #27ae60;
+        }
+
+        .status.offline {
+            background: #e74c3c;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 0;
+        }
+
+        .sidebar {
+            background: #f8f9fa;
+            padding: 20px;
+            border-right: 1px solid #dee2e6;
+        }
+
+        .endpoint-group {
+            margin-bottom: 25px;
+        }
+
+        .endpoint-group h3 {
+            color: #495057;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .endpoint-btn {
+            display: block;
+            width: 100%;
+            padding: 12px 15px;
+            margin: 8px 0;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s;
+            font-size: 0.9em;
+        }
+
+        .endpoint-btn:hover {
+            background: #e9ecef;
+            border-color: #adb5bd;
+            transform: translateX(5px);
+        }
+
+        .endpoint-btn.active {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        .method {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .method.get { background: #28a745; color: white; }
+        .method.post { background: #007bff; color: white; }
+        .method.put { background: #ffc107; color: #333; }
+        .method.delete { background: #dc3545; color: white; }
+
+        .content-area {
+            padding: 30px;
+        }
+
+        .test-form {
+            display: none;
+        }
+
+        .test-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 0.95em;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+
+        textarea {
+            min-height: 120px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        .response-section {
+            margin-top: 30px;
+            display: none;
+        }
+
+        .response-section.show {
+            display: block;
+        }
+
+        .response-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px 6px 0 0;
+            border: 1px solid #dee2e6;
+            border-bottom: none;
+        }
+
+        .response-status {
+            font-weight: 600;
+        }
+
+        .response-status.success { color: #28a745; }
+        .response-status.error { color: #dc3545; }
+
+        .response-body {
+            padding: 20px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 0 0 6px 6px;
+            overflow-x: auto;
+        }
+
+        pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .hint {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>☕ Cafe Kiosk API Tester</h1>
+            <p>Spring Boot Backend API Testing Interface</p>
+            <div class="status online" id="status">● Server Online - Port 8080</div>
+        </header>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="endpoint-group">
+                    <h3>Categories</h3>
+                    <button class="endpoint-btn" onclick="showForm('getCategories')">
+                        <span class="method get">GET</span> Get All Categories
+                    </button>
+                </div>
+
+                <div class="endpoint-group">
+                    <h3>Menu Items</h3>
+                    <button class="endpoint-btn" onclick="showForm('getAllMenu')">
+                        <span class="method get">GET</span> Get All Menu
+                    </button>
+                    <button class="endpoint-btn" onclick="showForm('getMenuByCategory')">
+                        <span class="method get">GET</span> Get by Category
+                    </button>
+                </div>
+
+                <div class="endpoint-group">
+                    <h3>Cart (Session)</h3>
+                    <button class="endpoint-btn" onclick="showForm('addToCart')">
+                        <span class="method post">POST</span> Add to Cart
+                    </button>
+                    <button class="endpoint-btn" onclick="showForm('viewCart')">
+                        <span class="method get">GET</span> View Cart
+                    </button>
+                    <button class="endpoint-btn" onclick="showForm('clearCart')">
+                        <span class="method post">POST</span> Clear Cart
+                    </button>
+                </div>
+
+                <div class="endpoint-group">
+                    <h3>Orders</h3>
+                    <button class="endpoint-btn" onclick="showForm('createOrder')">
+                        <span class="method post">POST</span> Create Order
+                    </button>
+                </div>
+            </div>
+
+            <div class="content-area">
+                <!-- Get All Categories -->
+                <div id="getCategories" class="test-form">
+                    <h2>Get All Categories</h2>
+                    <p style="color: #6c757d; margin: 10px 0 20px;">Endpoint: <code>GET /menu (returns categories with menu items)</code></p>
+                    <button class="btn-primary" onclick="testAPI('getCategories')">Send Request</button>
+                </div>
+
+                <!-- Get All Menu -->
+                <div id="getAllMenu" class="test-form">
+                    <h2>Get All Available Menu Items</h2>
+                    <p style="color: #6c757d; margin: 10px 0 20px;">Endpoint: <code>GET /menu</code></p>
+                    <button class="btn-primary" onclick="testAPI('getAllMenu')">Send Request</button>
+                </div>
+
+                <!-- Get Menu by Category -->
+                <div id="getMenuByCategory" class="test-form">
+                    <h2>Get Menu Items by Category</h2>
+                    <p style="color: #6c757d; margin: 10px 0 20px;">Endpoint: <code>GET /menu?categoryId={id}</code></p>
+                    <div class="hint">
+                        <strong>💡 Hint:</strong> Common category IDs: 1 (커피), 2 (디저트), 3 (음료)
+                    </div>
+                    <div class="form-group">
+                        <label>Category ID:</label>
+                        <input type="number" id="categoryId" placeholder="Enter category ID (e.g., 1)" value="1">
+                    </div>
+                    <button class="btn-primary" onclick="testAPI('getMenuByCategory')">Send Request</button>
+                </div>
+
+                <!-- Add to Cart -->
+                <div id="addToCart" class="test-form">
+                    <h2>Add Item to Cart</h2>
+                    <p style="color: #6c757d; margin: 10px 0 20px;">Endpoint: <code>POST /cart/add</code></p>
+                    <div class="hint">
+                        <strong>💡 Hint:</strong> Uses HTTP session to store cart. Make sure cookies are enabled.
+                    </div>
+                    <div class="form-group">
+                        <label>Menu Item ID:</label>
+                        <input type="number" id="menuItemId" placeholder="Enter menu item ID" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity:</label>
+                        <input type="number" id="quantity" placeholder="Enter quantity" value="1" min="1">
+                    </div>
+                    <button class="btn-primary" onclick="testAPI('addToCart')">Add to Cart</button>
+                </div>
+
+                <!-- View Cart -->
+                <div id="viewCart" class="test-form">
+                    <h2>View Shopping Cart</h2>
+                    <p style="color: #6c757d; margin: 10px 0 20px;">Endpoint: <code>GET /cart</code></p>
+                    <div class="hint">
+                        <strong>💡 Hint:</strong> This returns the cart page. Cart data is stored in session.
+                    </div>
+                    <button class="btn-primary" onclick="testAPI('viewCart')">View Cart</button>
+                </div>
+
+                <!-- Clear Cart -->
+                <div id="clearCart" class="test-form">
+                    <h2>Clear Shopping Cart</h2>
+                    <p style="color: #6c757d; margin: 10px 0 20px;">Endpoint: <code>POST /cart/clear</code></p>
+                    <button class="btn-primary" onclick="testAPI('clearCart')">Clear Cart</button>
+                </div>
+
+                <!-- Create Order -->
+                <div id="createOrder" class="test-form">
+                    <h2>Create Order (Checkout)</h2>
+                    <p style="color: #6c757d; margin: 10px 0 20px;">Endpoint: <code>POST /order/checkout</code></p>
+                    <div class="hint">
+                        <strong>💡 Hint:</strong> Make sure cart has items first! Uses items from current session cart.
+                    </div>
+                    <div class="form-group">
+                        <label>Customer Name (Optional):</label>
+                        <input type="text" id="customerName" placeholder="Enter customer name">
+                    </div>
+                    <button class="btn-primary" onclick="testAPI('createOrder')">Create Order</button>
+                </div>
+
+                <!-- Response Section -->
+                <div id="responseSection" class="response-section">
+                    <h3>Response:</h3>
+                    <div class="response-header">
+                        <span class="response-status" id="responseStatus"></span>
+                        <span id="responseTime"></span>
+                    </div>
+                    <div class="response-body">
+                        <pre id="responseBody"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let activeForm = null;
+
+        function showForm(formId) {
+            // Hide all forms
+            document.querySelectorAll('.test-form').forEach(form => {
+                form.classList.remove('active');
+            });
+
+            // Remove active state from all buttons
+            document.querySelectorAll('.endpoint-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected form
+            document.getElementById(formId).classList.add('active');
+
+            // Add active state to clicked button
+            event.target.closest('.endpoint-btn').classList.add('active');
+
+            // Hide response
+            document.getElementById('responseSection').classList.remove('show');
+
+            activeForm = formId;
+        }
+
+        async function testAPI(endpoint) {
+            const startTime = Date.now();
+            const responseSection = document.getElementById('responseSection');
+            const responseStatus = document.getElementById('responseStatus');
+            const responseTime = document.getElementById('responseTime');
+            const responseBody = document.getElementById('responseBody');
+
+            try {
+                let url, options;
+
+                switch(endpoint) {
+                    case 'getCategories':
+                    case 'getAllMenu':
+                        url = '/menu';
+                        options = { method: 'GET' };
+                        break;
+
+                    case 'getMenuByCategory':
+                        const categoryId = document.getElementById('categoryId').value;
+                        url = `/menu?categoryId=${categoryId}`;
+                        options = { method: 'GET' };
+                        break;
+
+                    case 'addToCart':
+                        const menuItemId = document.getElementById('menuItemId').value;
+                        const quantity = document.getElementById('quantity').value;
+                        url = `/cart/add?menuItemId=${menuItemId}&quantity=${quantity}`;
+                        options = { method: 'POST' };
+                        break;
+
+                    case 'viewCart':
+                        url = '/cart';
+                        options = { method: 'GET' };
+                        break;
+
+                    case 'clearCart':
+                        url = '/cart/clear';
+                        options = { method: 'POST' };
+                        break;
+
+                    case 'createOrder':
+                        const customerName = document.getElementById('customerName').value;
+                        url = `/order/checkout${customerName ? '?customerName=' + encodeURIComponent(customerName) : ''}`;
+                        options = { method: 'POST' };
+                        break;
+                }
+
+                const response = await fetch(url, options);
+                const endTime = Date.now();
+                const duration = endTime - startTime;
+
+                // Handle different content types
+                const contentType = response.headers.get('content-type');
+                let body;
+
+                if (contentType && contentType.includes('application/json')) {
+                    body = await response.json();
+                    responseBody.textContent = JSON.stringify(body, null, 2);
+                } else if (contentType && contentType.includes('text/html')) {
+                    body = await response.text();
+                    responseBody.textContent = 'HTML Response (showing first 500 chars):\n\n' + body.substring(0, 500) + '...';
+                } else {
+                    body = await response.text();
+                    responseBody.textContent = body;
+                }
+
+                // Update response section
+                responseStatus.textContent = `Status: ${response.status} ${response.statusText}`;
+                responseStatus.className = `response-status ${response.ok ? 'success' : 'error'}`;
+                responseTime.textContent = `${duration}ms`;
+                responseSection.classList.add('show');
+
+            } catch (error) {
+                const endTime = Date.now();
+                const duration = endTime - startTime;
+
+                responseStatus.textContent = 'Status: Error';
+                responseStatus.className = 'response-status error';
+                responseTime.textContent = `${duration}ms`;
+                responseBody.textContent = `Error: ${error.message}`;
+                responseSection.classList.add('show');
+            }
+        }
+
+        // Check server status on load
+        async function checkServerStatus() {
+            try {
+                const response = await fetch('/menu');
+                if (response.ok) {
+                    document.getElementById('status').className = 'status online';
+                    document.getElementById('status').textContent = '● Server Online - Port 8080';
+                } else {
+                    throw new Error('Server returned error');
+                }
+            } catch (error) {
+                document.getElementById('status').className = 'status offline';
+                document.getElementById('status').textContent = '● Server Offline';
+            }
+        }
+
+        // Check status on load
+        checkServerStatus();
+
+        // Show first form by default
+        showForm('getCategories');
+    </script>
+</body>
+</html>

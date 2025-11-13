@@ -1,7 +1,10 @@
 package MKSS.backend.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,7 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 @Entity
-@Table(name = "category")
+@Table(name = "categories")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,9 +34,10 @@ public class Category {
 	@Column(name = "display_order")
 	private Integer displayOrder = 0;
 	
-	@OneToMany(mappedBy = "category", cascade=Cascade.Type.ALL)
+	@OneToMany(mappedBy = "category", cascade=CascadeType.ALL)
 	@ToString.Exclude
 	@Builder.Default
+	@JsonIgnore
 	private List<MenuItem> menuItems = new ArrayList<>();
 	
 	@Column(name = "created_at", updatable=false)

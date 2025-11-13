@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:mysql://mydb.czwaweqgeexp.ap-northeast-2.rds.amazonaws.com:3306/cafedb?useSSL=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: DoodyDanks48  # OK for local dev
+  jpa:
+    show-sql: true
+
+server:
+  servlet:
+    session:
+      cookie:
+        secure: false  # OK for local HTTP
