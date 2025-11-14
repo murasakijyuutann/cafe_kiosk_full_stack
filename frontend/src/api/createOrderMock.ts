@@ -1,5 +1,5 @@
 // src/api/createOrderMock.ts
-export type CartItem = { id: number; name: string; price: number; quantity: number };
+export type CartItem = { id: number; name: string; price: number; quantity: number, description:string };
 
 export const createOrder = async (orderData: { items: CartItem[] }) => {
   return new Promise((resolve) => {
@@ -13,6 +13,7 @@ export const createOrder = async (orderData: { items: CartItem[] }) => {
         items: orderData.items.map((i) => ({
           menuItemName: i.name,
           price: i.price,
+          description: i.description,
           quantity: i.quantity,
           subtotal: i.price * i.quantity,
         })),

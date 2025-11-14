@@ -53,7 +53,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const addToCart = (menuItem: MenuItem, quantity: number = 1) => {
     setCart((prevCart:CartItem[]) => {
       const existingItem = prevCart.find(
-        (item) => item.menuItemId === menuItem.id
+        (item) => item.menuItemId === menuItem.id //db에서 똑같은 아이디를 찾는다
       );
 
       if (existingItem) {

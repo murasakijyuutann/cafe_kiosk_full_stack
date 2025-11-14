@@ -20,7 +20,7 @@ const FooterText = styled.p`
 const Footer = () => {
   return (
     <FooterContainer>
-      <FooterText>&copy; 명.경.지.수 2025 Cafe Kiosk. All rights reserved.</FooterText>
+      <FooterText>&copy; 明.鏡.止.水 2025 Cafe Kiosk. All rights reserved.</FooterText>
     </FooterContainer>
   );
 };
