@@ -1,4 +1,4 @@
-package MKSS.backend.Controller;
+package controller;
 
 import java.util.List;
 
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import MKSS.backend.Service.MenuService;
-import MKSS.backend.model.Category;
-import MKSS.backend.model.MenuItem;
+import Service.MenuService;
+import model.Category;
+import model.MenuItem;
 import lombok.RequiredArgsConstructor;
 
 @Controller

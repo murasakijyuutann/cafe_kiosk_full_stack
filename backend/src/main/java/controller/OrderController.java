@@ -1,4 +1,4 @@
-package MKSS.backend.Controller;
+package controller;
 
 import java.util.List;
 
@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import MKSS.backend.Service.CartService;
-import MKSS.backend.Service.OrderService;
-import MKSS.backend.dto.CartItem;
-import MKSS.backend.dto.OrderRequest;
-import MKSS.backend.dto.OrderResponse;
+import Service.CartService;
+import Service.OrderService;
+import dto.CartItem;
+import dto.OrderRequest;
+import dto.OrderResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 @Controller

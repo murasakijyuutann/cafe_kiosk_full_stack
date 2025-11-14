@@ -1,14 +1,14 @@
-package MKSS.backend.Service;
+package service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import MKSS.backend.model.Category;
-import MKSS.backend.model.MenuItem;
-import MKSS.backend.repository.CategoryRepository;
-import MKSS.backend.repository.MenuItemRepository;
+import model.Category;
+import model.MenuItem;
+import repository.CategoryRepository;
+import repository.MenuItemRepository;
 import lombok.RequiredArgsConstructor;
 
 @Service

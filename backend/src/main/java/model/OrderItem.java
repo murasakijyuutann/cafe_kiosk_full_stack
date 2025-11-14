@@ -1,4 +1,4 @@
-package MKSS.backend.model;
+package model;
 
 import java.math.BigDecimal;
 

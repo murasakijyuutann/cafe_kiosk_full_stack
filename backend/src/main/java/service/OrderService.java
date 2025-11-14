@@ -1,4 +1,4 @@
-package MKSS.backend.Service;
+package service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -9,14 +9,14 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import MKSS.backend.dto.CartItem;
-import MKSS.backend.dto.OrderRequest;
-import MKSS.backend.dto.OrderResponse;
-import MKSS.backend.model.MenuItem;
-import MKSS.backend.model.Order;
-import MKSS.backend.model.OrderItem;
-import MKSS.backend.model.OrderStatus;
-import MKSS.backend.repository.OrderRepository;
+import dto.CartItem;
+import dto.OrderRequest;
+import dto.OrderResponse;
+import model.MenuItem;
+import model.Order;
+import model.OrderItem;
+import model.OrderStatus;
+import repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 
 @Service

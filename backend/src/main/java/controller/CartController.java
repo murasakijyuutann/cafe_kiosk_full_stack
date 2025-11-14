@@ -1,4 +1,4 @@
-package MKSS.backend.Controller;
+package controller;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import MKSS.backend.Service.CartService;
-import MKSS.backend.dto.CartItem;
+import dto.CartItem;
+import service.CartService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 @Controller

@@ -1,12 +1,12 @@
-package MKSS.backend.Service;
+package service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import MKSS.backend.dto.CartItem;
-import MKSS.backend.model.MenuItem;
+import dto.CartItem;
+import model.MenuItem;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 

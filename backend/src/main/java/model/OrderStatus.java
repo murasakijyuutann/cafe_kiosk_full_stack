@@ -1,4 +1,4 @@
-package MKSS.backend.model;
+package model;
 
 public enum OrderStatus {
 	PENDING,

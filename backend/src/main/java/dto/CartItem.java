@@ -1,4 +1,4 @@
-package MKSS.backend.dto;
+package dto;
 
 import java.math.BigDecimal;
 

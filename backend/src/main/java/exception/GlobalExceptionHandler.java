@@ -1,6 +1,6 @@
-package MKSS.backend.exception;
+package exception;
 
-import MKSS.backend.repository.CategoryRepository;
+import repository.CategoryRepository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

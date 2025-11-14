@@ -1,10 +1,10 @@
-package MKSS.backend.dto;
+package dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import MKSS.backend.model.OrderStatus;
+import model.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
