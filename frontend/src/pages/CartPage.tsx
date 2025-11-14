@@ -5,12 +5,13 @@ import Cart from "../components/cart/Cart";
 //import { createOrder } from "../api/cafekioskApi";
 import { createOrder } from "../api/createOrderMock";
 import { useState } from "react";
+import OrderSuccessAnimation from "../components/anim/OrderSuccessAnimation";
 
 const CartPage = () => {
   const { cart, getCartTotal, clearCart } = useCart();
   const navigate = useNavigate();
-  
   const [loading, setLoading] = useState(false)
+  const [showAnim, setShowAnim] = useState(false);
 
   const formatPrice = (price:number):string => {
     return new Intl.NumberFormat("ko-KR").format(price);
@@ -29,18 +30,22 @@ const CartPage = () => {
     setLoading(true);
 
     try {
-      const orderData = {
+      const orderData = {items: cart, };
+     const order = await createOrder(orderData);   
         
-        items: cart,
-      };
+        setShowAnim(true);
+     
 
-      const order = await createOrder(orderData);
+      
+         setTimeout(()=>{
+          // 장바구니 비우기
+          clearCart();
+          // 주문 완료 페이지로 이동
+         navigate("/order-complete", { state: { order } });
+         },1100)
+      
 
-      // 장바구니 비우기
-      clearCart();
-
-      // 주문 완료 페이지로 이동
-      navigate("/order-complete", { state: { order } });
+     
     } catch (error) {
       console.error("주문 생성 실패:", error);
       alert("주문 처리 중 오류가 발생했습니다. 다시 시도해주세요.");
@@ -51,6 +56,7 @@ const CartPage = () => {
 
   if (cart.length === 0) {
     return (
+      
       <div>
         <h1 className="mb-4">장바구니</h1>
         <div className="alert alert-warning">
@@ -91,6 +97,7 @@ const CartPage = () => {
   }
 
   return (
+    <>
     <div>
       <h1 className="mb-4">장바구니</h1>
 
@@ -125,6 +132,15 @@ const CartPage = () => {
         </div>
       </div>
     </div>
+       {/* ✅ 주문 성공 애니메이션 오버레이 */}
+      {showAnim && (
+        <OrderSuccessAnimation
+          durationMs={1100}
+          // imgSrc={coffee}
+          onComplete={() => setShowAnim(false)}
+        />
+      )}
+    </>
   );
 };
 
