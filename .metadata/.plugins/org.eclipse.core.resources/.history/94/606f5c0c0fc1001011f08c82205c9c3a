@@ -1,0 +1,59 @@
+
+package controller;
+
+import dto.CartItem;
+import dto.OrderRequest;
+import dto.OrderResponse;
+import service.CartService;
+import service.OrderService;
+import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@Controller
+@RequestMapping("/order")
+@RequiredArgsConstructor
+public class OrderController {
+
+    private final OrderService orderService;
+    private final CartService cartService;
+
+    @PostMapping("/checkout")
+    public String checkout(
+            @RequestParam(required = false) String customerName,
+            HttpSession session,
+            Model model) {
+
+        List<CartItem> cart = cartService.getCart(session);
+
+        if (cart.isEmpty()) {
+            return "redirect:/cart";
+        }
+
+        // 주문 생성
+        OrderRequest request = OrderRequest.builder()
+                .customerName(customerName)
+                .items(cart)
+                .build();
+
+        OrderResponse order = orderService.createOrder(request);
+
+        // 장바구니 비우기
+        cartService.clearCart(session);
+
+        // 주문 완료 페이지로
+        model.addAttribute("order", order);
+        return "order-complete";
+    }
+
+    @GetMapping("/{orderNumber}")
+    public String viewOrder(@PathVariable String orderNumber, Model model) {
+        OrderResponse order = orderService.getOrderByNumber(orderNumber);
+        model.addAttribute("order", order);
+        return "order-complete";
+    }
+}

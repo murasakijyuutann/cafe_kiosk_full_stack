@@ -1,0 +1,39 @@
+package controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import service.MenuService;
+import model.Category;
+import model.MenuItem;
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequestMapping("/menu")
+@RequiredArgsConstructor
+public class MenuController {
+
+	private final MenuService menuService;
+
+	@GetMapping
+	public ResponseEntity<List<MenuItem>> getMenuItems(
+			@RequestParam(required = false) Long categoryId) {
+
+		List<MenuItem> menuItems;
+
+		if(categoryId != null) {
+			menuItems = menuService.getMenuItemsByCategory(categoryId);
+		} else {
+			menuItems = menuService.getAllAvailableMenuItems();
+		}
+
+		return ResponseEntity.ok(menuItems);
+	}
+}

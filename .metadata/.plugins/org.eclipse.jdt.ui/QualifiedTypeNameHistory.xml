@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="java.awt.MenuItem"/>
+    <fullyQualifiedTypeName name="model.MenuItem"/>
+    <fullyQualifiedTypeName name="model.Category"/>
+    <fullyQualifiedTypeName name="repository.MenuItemRepository"/>
+    <fullyQualifiedTypeName name="dto.CartItem"/>
+    <fullyQualifiedTypeName name="java.math.BigDecimal"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
+</qualifiedTypeNameHistroy>

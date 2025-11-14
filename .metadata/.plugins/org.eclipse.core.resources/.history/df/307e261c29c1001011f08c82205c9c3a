@@ -1,0 +1,77 @@
+package service;
+
+import dto.CartItem;
+import model.MenuItem;
+import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class CartService {
+
+    private static final String CART_SESSION_KEY = "cart";
+
+    private final MenuService menuService;
+
+    // 장바구니 조회
+    @SuppressWarnings("unchecked")
+    public List<CartItem> getCart(HttpSession session) {
+        List<CartItem> cart = (List<CartItem>) session.getAttribute(CART_SESSION_KEY);
+        if (cart == null) {
+            cart = new ArrayList<>();
+            session.setAttribute(CART_SESSION_KEY, cart);
+        }
+        return cart;
+    }
+
+    // 장바구니에 항목 추가
+    public void addToCart(HttpSession session, Long menuItemId, Integer quantity) {
+        MenuItem menuItem = menuService.getMenuItemById(menuItemId);
+        List<CartItem> cart = getCart(session);
+
+        // 이미 장바구니에 있는지 확인
+        CartItem existingItem = cart.stream()
+                .filter(item -> item.getMenuItemId().equals(menuItemId))
+                .findFirst()
+                .orElse(null);
+
+        if (existingItem != null) {
+            // 수량 증가
+            existingItem.setQuantity(existingItem.getQuantity() + quantity);
+            existingItem.calculateSubtotal();
+        } else {
+            // 새 항목 추가
+            CartItem newItem = CartItem.builder()
+                    .menuItemId(menuItem.getId())
+                    .menuItemName(menuItem.getName())
+                    .price(menuItem.getPrice())
+                    .quantity(quantity)
+                    .build();
+            newItem.calculateSubtotal();
+            cart.add(newItem);
+        }
+    }
+
+    // 장바구니에서 항목 제거
+    public void removeFromCart(HttpSession session, Long menuItemId) {
+        List<CartItem> cart = getCart(session);
+        cart.removeIf(item -> item.getMenuItemId().equals(menuItemId));
+    }
+
+    // 장바구니 비우기
+    public void clearCart(HttpSession session) {
+        session.removeAttribute(CART_SESSION_KEY);
+    }
+
+    // 장바구니 총액 계산
+    public java.math.BigDecimal getCartTotal(HttpSession session) {
+        List<CartItem> cart = getCart(session);
+        return cart.stream()
+                .map(CartItem::getSubtotal)
+                .reduce(java.math.BigDecimal.ZERO, java.math.BigDecimal::add);
+    }
+}

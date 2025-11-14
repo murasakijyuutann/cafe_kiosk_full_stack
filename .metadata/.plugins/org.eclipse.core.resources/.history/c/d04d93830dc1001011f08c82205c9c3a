@@ -1,0 +1,22 @@
+package repository;
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import entity.MenuItem;
+
+import java.util.List;
+
+@Repository
+public interface MenuItemRepository extends JpaRepository<model.MenuItem, Long> {
+
+    // 카테고리별 사용 가능한 메뉴 조회
+    List<model.MenuItem> findByCategoryIdAndAvailableTrue(Long categoryId);
+
+    // 모든 사용 가능한 메뉴 조회
+    static List<model.MenuItem> findByAvailableTrue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}
