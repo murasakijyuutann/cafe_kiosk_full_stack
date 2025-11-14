@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import MKSS.backend.Service.MenuService;
 import MKSS.backend.model.Category;
+import MKSS.backend.model.MenuItem;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -29,9 +31,9 @@ public class MenuController {
 		}else {
 			menuItems = menuService.getAllAvailableMenuItems();
 		}
-	model.addAllAttributes("categories",categories);
-	model.addAllAttributes("menuItems",menuItems);
-	model.addAllAttributes("selectedCategoryId", categoryId);	
+	model.addAllAttribute("categories",categories);
+	model.addAllAttribute("menuItems",menuItems);
+	model.addAllAttribute("selectedCategoryId", categoryId);	
 	
 	return "menu";
 	}

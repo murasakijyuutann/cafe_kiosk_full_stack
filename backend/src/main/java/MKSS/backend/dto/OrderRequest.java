@@ -11,8 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
+	}
 public class OrderRequest {
 
 	private String customerName;
-	private List<CartItem>item;
+	private List<CartItem>items;
 }

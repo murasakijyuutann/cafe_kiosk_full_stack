@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import MKSS.backend.Service.CartService;
+import MKSS.backend.dto.CartItem;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 @Controller
@@ -23,7 +24,7 @@ public class CartController {
 	@GetMapping
 	public String viewCart(HttpSession session, Model model) {
 		List<CartItem> cart = cartService.getCart(session);
-		BigDecimal total = CartService.getCartTotal(session);
+		BigDecimal total = cartService.getCartTotal(session);
 		
 		model.addAllAttributes("cartItems",cart);
 		model.addAllAttributes("cartToral",total);
