@@ -4,7 +4,7 @@ import { CartProvider } from "./context/CartContext";
 
 
 import CartPage from "./pages/CartPage";
-import OrderCompletePage from "./pages/OderPage";
+import OrderCompletePage from "./pages/OrderPage";
 import TestMenu from "./pages/TestMenu";
 import Footer from "./components/Footer";
 import RightSidebar from "./components/RightSidebar";
