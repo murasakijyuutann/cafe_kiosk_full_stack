@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import MKSS.backend.dto.CartItem;
+import MKSS.backend.exception.ResourceNotFoundException;
 import MKSS.backend.model.MenuItem;
 import MKSS.backend.repository.MenuItemRepository;
 import jakarta.servlet.http.HttpSession;
@@ -31,7 +32,7 @@ public class CartService {
 
 	public void addToCart(HttpSession session, Long menuItemId, Integer quantity) {
 		MenuItem menuItem = menuItemRepository.findById(menuItemId)
-				.orElseThrow(() -> new RuntimeException("Menu item not found"));
+				.orElseThrow(() -> new ResourceNotFoundException("MenuItem", "id", menuItemId));
 
 		List<CartItem> cart = getCart(session);
 

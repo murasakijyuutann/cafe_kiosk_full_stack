@@ -15,6 +15,7 @@ import MKSS.backend.Service.OrderService;
 import MKSS.backend.dto.CartItem;
 import MKSS.backend.dto.OrderRequest;
 import MKSS.backend.dto.OrderResponse;
+import MKSS.backend.exception.EmptyCartException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
@@ -34,10 +35,7 @@ public class OrderController {
 		List<CartItem> cart = cartService.getCart(session);
 
 		if(cart.isEmpty()) {
-			Map<String, Object> errorResponse = new HashMap<>();
-			errorResponse.put("success", false);
-			errorResponse.put("message", "Cart is empty");
-			return ResponseEntity.badRequest().body(errorResponse);
+			throw new EmptyCartException("Cannot checkout with an empty cart");
 		}
 
 		// Create order

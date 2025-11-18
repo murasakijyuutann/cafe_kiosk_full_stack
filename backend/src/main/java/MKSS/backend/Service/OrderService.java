@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import MKSS.backend.dto.CartItem;
 import MKSS.backend.dto.OrderRequest;
 import MKSS.backend.dto.OrderResponse;
+import MKSS.backend.exception.ResourceNotFoundException;
 import MKSS.backend.model.MenuItem;
 import MKSS.backend.model.Order;
 import MKSS.backend.model.OrderItem;
@@ -49,7 +50,7 @@ public class OrderService {
 		// Create order items
 		for (CartItem cartItem : request.getItems()) {
 			MenuItem menuItem = menuItemRepository.findById(cartItem.getMenuItemId())
-					.orElseThrow(() -> new RuntimeException("Menu item not found"));
+					.orElseThrow(() -> new ResourceNotFoundException("MenuItem", "id", cartItem.getMenuItemId()));
 
 			OrderItem orderItem = OrderItem.builder()
 					.order(order)
