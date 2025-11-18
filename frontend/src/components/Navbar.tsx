@@ -1,5 +1,6 @@
 // import { useState, FormEvent } from 'react';
 
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 // import { useNavigate, createSearchParams } from 'react-router-dom';
@@ -18,14 +19,14 @@ const MenuList = styled.ul`
 const Navbar = () => {
   return (
     <Menu>
-      <div>Home</div>
+      <Link to="/">Home</Link>
       <MenuList>
-        <li>Menu</li>
+        <Link to="/menu"><li>Menu</li></Link>
         <li>Caffeine</li>
         <li>Non-Coffee</li>
         <li>Desert</li>
       </MenuList>
-      <div>Cart</div>
+      <Link to="/cart"><div>Cart</div></Link>
     </Menu>
   );
 };
