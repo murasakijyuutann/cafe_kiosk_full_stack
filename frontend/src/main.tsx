@@ -1,13 +1,12 @@
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import './index.css';
-import App from './App.tsx';
-import { CartProvider } from './context/CartContext.tsx';
+// main.tsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
 
-createRoot(document.getElementById('root')!).render(
-  <CartProvider>
-  <BrowserRouter>
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  <React.StrictMode>
     <App />
-  </BrowserRouter>
-  </CartProvider>
+  </React.StrictMode>
 );
