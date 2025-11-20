@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import MKSS.backend.dto.CartItem;
-import MKSS.backend.exception.ResourceNotFoundException;
+import MKSS.backend.dto.ResourceNotFoundException;
 import MKSS.backend.model.MenuItem;
 import MKSS.backend.repository.MenuItemRepository;
 import jakarta.servlet.http.HttpSession;

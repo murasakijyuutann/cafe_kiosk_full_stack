@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import MKSS.backend.dto.CartItem;
 import MKSS.backend.dto.OrderRequest;
 import MKSS.backend.dto.OrderResponse;
-import MKSS.backend.exception.ResourceNotFoundException;
+import MKSS.backend.dto.ResourceNotFoundException;
 import MKSS.backend.model.MenuItem;
 import MKSS.backend.model.Order;
 import MKSS.backend.model.OrderItem;
