@@ -12,9 +12,9 @@
   </parent>
 
   <groupId>mjyuu</groupId>
-  <artifactId>vocaloidshoppingmall</artifactId>
+  <artifactId>cafe_kiosk</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>Vocaloid Shopping Mall</name>
+  <name>Cafe Kiosk</name>
   <description>Spring Boot + MySQL full-stack e-commerce system</description>
 
     <properties>

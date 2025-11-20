@@ -9,7 +9,7 @@ const Winter = styled.img`
 const Home = () => {
   return (
     <>
-      <Winter src="../public/images/cafe2.jpg" alt="winter" />;
+      <Winter src="../public/images/cafe2.jpg" alt="winter" />
     </>
   );
 };
