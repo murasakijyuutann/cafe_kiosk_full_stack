@@ -1,8 +1,8 @@
-# Branch Setup Guide - Step by Step
+# 브랜치 설정 가이드 - 단계별 안내
 
-## 🎯 Goal
+## 🎯 목표
 
-Create a branch structure for 5 team members:
+5명의 팀원을 위한 브랜치 구조 생성:
 
 ```
 main
@@ -16,48 +16,48 @@ main
 
 ---
 
-## 📋 Step 1: Commit Current Changes (Team Leader)
+## 📋 1단계: 현재 변경사항 커밋하기 (팀 리더)
 
-First, save your current work:
+먼저 현재 작업을 저장하세요:
 
 ```bash
-# Navigate to project directory
+# 프로젝트 디렉토리로 이동
 cd c:/Users/rwoo1/Documents/VSCodeProjects/cafe-kiosk
 
-# Check what's changed
+# 변경사항 확인
 git status
 
-# Add all files
+# 모든 파일 추가
 git add .
 
-# Commit with message
+# 메시지와 함께 커밋
 git commit -m "docs: Add project documentation and guides"
 
-# Push to main
+# main에 푸시
 git push origin main
 ```
 
 ---
 
-## 📋 Step 2: Create develop Branch (Team Leader)
+## 📋 2단계: develop 브랜치 생성하기 (팀 리더)
 
-The `develop` branch is where all team members will merge their work:
+`develop` 브랜치는 모든 팀원의 작업이 병합되는 곳입니다:
 
 ```bash
-# Make sure you're on main
+# main 브랜치에 있는지 확인
 git checkout main
 
-# Create develop branch from main
+# main에서 develop 브랜치 생성
 git checkout -b develop
 
-# Push develop to remote
+# develop을 원격에 푸시
 git push -u origin develop
 
-# Verify it was created
+# 생성되었는지 확인
 git branch -a
 ```
 
-You should see:
+다음과 같이 표시되어야 합니다:
 ```
 * develop
   main
@@ -67,35 +67,35 @@ You should see:
 
 ---
 
-## 📋 Step 3: Create Feature Branches (Team Leader)
+## 📋 3단계: 기능 브랜치 생성하기 (팀 리더)
 
-Now create a branch for each team member:
+이제 각 팀원을 위한 브랜치를 생성합니다:
 
 ```bash
-# Make sure you're on develop
+# develop 브랜치에 있는지 확인
 git checkout develop
 
-# Create branch for Team Member 1 (Database)
+# 팀원 1을 위한 브랜치 생성 (데이터베이스)
 git checkout -b feature/database
 git push -u origin feature/database
 git checkout develop
 
-# Create branch for Team Member 2 (Service)
+# 팀원 2를 위한 브랜치 생성 (서비스)
 git checkout -b feature/service
 git push -u origin feature/service
 git checkout develop
 
-# Create branch for Team Member 3 (Controller)
+# 팀원 3을 위한 브랜치 생성 (컨트롤러)
 git checkout -b feature/controller
 git push -u origin feature/controller
 git checkout develop
 
-# Create branch for Team Member 4 (Frontend Menu)
+# 팀원 4를 위한 브랜치 생성 (프론트엔드 메뉴)
 git checkout -b feature/frontend-menu
 git push -u origin feature/frontend-menu
 git checkout develop
 
-# Create branch for Team Member 5 (Frontend Cart)
+# 팀원 5를 위한 브랜치 생성 (프론트엔드 장바구니)
 git checkout -b feature/frontend-cart
 git push -u origin feature/frontend-cart
 git checkout develop
@@ -103,16 +103,16 @@ git checkout develop
 
 ---
 
-## 📋 Step 4: Verify All Branches
+## 📋 4단계: 모든 브랜치 확인하기
 
-Check that all branches were created:
+모든 브랜치가 생성되었는지 확인합니다:
 
 ```bash
-# List all branches (local and remote)
+# 모든 브랜치 나열 (로컬 및 원격)
 git branch -a
 ```
 
-You should see:
+다음과 같이 표시되어야 합니다:
 ```
   develop
   feature/controller
@@ -132,162 +132,162 @@ You should see:
 
 ---
 
-## 👥 For Each Team Member: Getting Started
+## 👥 각 팀원: 시작하기
 
-Each team member should follow these steps:
+각 팀원은 다음 단계를 따라야 합니다:
 
-### Team Member Setup
+### 팀원 설정
 
 ```bash
-# 1. Clone the repository (first time only)
-git clone https://github.com/YOUR-USERNAME/cafe-kiosk.git
+# 1. 저장소 클론하기 (처음 한 번만)
+git clone https://github.com/murasakijyuutann/cafe-kiosk.git
 cd cafe-kiosk
 
-# 2. Check available branches
+# 2. 사용 가능한 브랜치 확인
 git branch -a
 
-# 3. Switch to YOUR assigned branch
-# Team Member 1:
+# 3. 자신에게 할당된 브랜치로 전환
+# 팀원 1:
 git checkout feature/database
 
-# Team Member 2:
+# 팀원 2:
 git checkout feature/service
 
-# Team Member 3:
+# 팀원 3:
 git checkout feature/controller
 
-# Team Member 4:
+# 팀원 4:
 git checkout feature/frontend-menu
 
-# Team Member 5:
+# 팀원 5:
 git checkout feature/frontend-cart
 
-# 4. Verify you're on the correct branch
+# 4. 올바른 브랜치에 있는지 확인
 git branch
 ```
 
 ---
 
-## 💻 Daily Workflow for Team Members
+## 💻 팀원을 위한 일일 워크플로우
 
-### Starting Work Each Day
+### 매일 작업 시작하기
 
 ```bash
-# 1. Go to your branch
-git checkout feature/database  # (use your branch name)
+# 1. 자신의 브랜치로 이동
+git checkout feature/database  # (자신의 브랜치 이름 사용)
 
-# 2. Get latest changes from develop
+# 2. develop에서 최신 변경사항 가져오기
 git pull origin develop
 
-# 3. Start coding!
+# 3. 코딩 시작!
 ```
 
-### Saving Your Work
+### 작업 저장하기
 
 ```bash
-# 1. Check what you changed
+# 1. 변경사항 확인
 git status
 
-# 2. Add files
+# 2. 파일 추가
 git add .
-# or add specific files:
+# 또는 특정 파일 추가:
 # git add src/main/java/com/cafekiosk/model/Category.java
 
-# 3. Commit with message
+# 3. 메시지와 함께 커밋
 git commit -m "feat: Add Category entity"
 
-# 4. Push to your branch
-git push origin feature/database  # (use your branch name)
+# 4. 자신의 브랜치에 푸시
+git push origin feature/database  # (자신의 브랜치 이름 사용)
 ```
 
 ---
 
-## 🔀 Creating a Pull Request
+## 🔀 Pull Request 생성하기
 
-When you finish a task:
+작업을 완료했을 때:
 
-### 1. Push Your Final Changes
+### 1. 최종 변경사항 푸시
 ```bash
 git add .
 git commit -m "feat: Complete database entities"
 git push origin feature/database
 ```
 
-### 2. Go to GitHub
-1. Navigate to: `https://github.com/YOUR-USERNAME/cafe-kiosk`
-2. You'll see a yellow banner: **"Compare & pull request"**
-3. Click it
+### 2. GitHub로 이동
+1. 다음으로 이동: `https://github.com/YOUR-USERNAME/cafe-kiosk`
+2. 노란색 배너가 표시됩니다: **"Compare & pull request"**
+3. 클릭하기
 
-### 3. Fill Out PR Form
+### 3. PR 양식 작성
 ```
-Title: [DB] Add Entity Classes and Repositories
+제목: [DB] Add Entity Classes and Repositories
 
-Description:
-## Changes
-- Added Category entity
-- Added MenuItem entity
-- Added Order entity
-- Added OrderItem entity
-- Added Repository interfaces
+설명:
+## 변경사항
+- Category 엔티티 추가
+- MenuItem 엔티티 추가
+- Order 엔티티 추가
+- OrderItem 엔티티 추가
+- Repository 인터페이스 추가
 
-## Checklist
-- [x] Code compiles
-- [x] Tested locally
-- [ ] Tests written (next PR)
+## 체크리스트
+- [x] 코드 컴파일됨
+- [x] 로컬 테스트 완료
+- [ ] 테스트 작성 (다음 PR)
 
-## Screenshots (if applicable)
+## 스크린샷 (해당하는 경우)
 N/A
 ```
 
-### 4. Set Base and Compare
+### 4. Base와 Compare 설정
 - **base:** `develop` ← **compare:** `feature/database`
 
-### 5. Request Reviewers
-- Select 1-2 team members to review
+### 5. 리뷰어 요청
+- 검토할 팀원 1-2명 선택
 
-### 6. Create Pull Request
-Click **"Create pull request"**
+### 6. Pull Request 생성
+**"Create pull request"** 클릭
 
 ---
 
-## 🔍 Reviewing a Pull Request
+## 🔍 Pull Request 검토하기
 
-When a teammate asks you to review:
+팀원이 검토를 요청했을 때:
 
-### 1. Go to Pull Requests Tab
+### 1. Pull Requests 탭으로 이동
 `https://github.com/YOUR-USERNAME/cafe-kiosk/pulls`
 
-### 2. Click on the PR
+### 2. PR 클릭
 
-### 3. Review the Code
-- Click **"Files changed"** tab
-- Read through the code
-- Click on line numbers to add comments
+### 3. 코드 검토
+- **"Files changed"** 탭 클릭
+- 코드 읽기
+- 줄 번호를 클릭하여 코멘트 추가
 
-### 4. Submit Review
-- Click **"Review changes"** button
-- Choose:
-  - ✅ **Approve** - Looks good!
-  - 💬 **Comment** - Just leaving feedback
-  - 🔄 **Request changes** - Needs fixes
+### 4. 검토 제출
+- **"Review changes"** 버튼 클릭
+- 선택:
+  - ✅ **Approve** - 좋아 보입니다!
+  - 💬 **Comment** - 피드백만 남기기
+  - 🔄 **Request changes** - 수정 필요
 
 ---
 
-## ✅ Merging a Pull Request (Team Leader)
+## ✅ Pull Request 병합하기 (팀 리더)
 
-After PR is approved:
+PR이 승인된 후:
 
-### 1. Check Requirements
-- [ ] At least 1 approval
-- [ ] No merge conflicts
-- [ ] All discussions resolved
+### 1. 요구사항 확인
+- [ ] 최소 1개의 승인
+- [ ] 병합 충돌 없음
+- [ ] 모든 논의 해결됨
 
-### 2. Merge
-1. Click **"Merge pull request"**
-2. Click **"Confirm merge"**
-3. Optionally: Click **"Delete branch"** (remote only, keeps local)
+### 2. 병합
+1. **"Merge pull request"** 클릭
+2. **"Confirm merge"** 클릭
+3. 선택사항: **"Delete branch"** 클릭 (원격만, 로컬은 유지)
 
-### 3. Update Local develop
+### 3. 로컬 develop 업데이트
 ```bash
 git checkout develop
 git pull origin develop
@@ -295,197 +295,197 @@ git pull origin develop
 
 ---
 
-## 🚨 Troubleshooting
+## 🚨 문제 해결
 
-### Problem: "Branch already exists"
+### 문제: "Branch already exists"
 
 ```bash
-# Delete local branch
+# 로컬 브랜치 삭제
 git branch -d feature/database
 
-# Delete remote branch
+# 원격 브랜치 삭제
 git push origin --delete feature/database
 
-# Recreate it
+# 재생성
 git checkout develop
 git checkout -b feature/database
 git push -u origin feature/database
 ```
 
-### Problem: "Your branch is behind"
+### 문제: "Your branch is behind"
 
 ```bash
 git pull origin develop
 ```
 
-### Problem: Merge Conflicts
+### 문제: 병합 충돌
 
 ```bash
-# 1. Pull latest develop
+# 1. 최신 develop 가져오기
 git checkout develop
 git pull origin develop
 
-# 2. Go to your branch
+# 2. 자신의 브랜치로 이동
 git checkout feature/database
 
-# 3. Merge develop into your branch
+# 3. develop을 자신의 브랜치로 병합
 git merge develop
 
-# 4. If conflicts, open the files and fix them
-# Look for:
+# 4. 충돌이 있으면 파일을 열고 수정
+# 다음을 찾아보세요:
 # <<<<<<< HEAD
-# your code
+# 내 코드
 # =======
-# their code
+# 상대방 코드
 # >>>>>>> develop
 
-# 5. After fixing
+# 5. 수정 후
 git add .
 git commit -m "chore: Resolve merge conflicts"
 git push
 ```
 
-### Problem: Accidentally Committed to Wrong Branch
+### 문제: 잘못된 브랜치에 실수로 커밋
 
 ```bash
-# 1. Note the commit hash
+# 1. 커밋 해시 확인
 git log --oneline
 
-# 2. Go to correct branch
+# 2. 올바른 브랜치로 이동
 git checkout feature/database
 
-# 3. Cherry-pick the commit
+# 3. 커밋 체리픽
 git cherry-pick <commit-hash>
 
-# 4. Go back to wrong branch
+# 4. 잘못된 브랜치로 돌아가기
 git checkout develop
 
-# 5. Remove the commit
+# 5. 커밋 제거
 git reset --hard HEAD~1
 ```
 
 ---
 
-## 📊 Checking Branch Status
+## 📊 브랜치 상태 확인하기
 
-### See All Branches
+### 모든 브랜치 보기
 ```bash
 git branch -a
 ```
 
-### See Current Branch
+### 현재 브랜치 보기
 ```bash
 git branch
 ```
 
-### See Branch History
+### 브랜치 히스토리 보기
 ```bash
 git log --oneline --graph --all
 ```
 
-### See Who's Working on What
+### 누가 무엇을 작업하는지 보기
 ```bash
 git branch -r
 ```
 
 ---
 
-## 🎓 Quick Reference Commands
+## 🎓 빠른 참조 명령어
 
-| Action | Command |
-|--------|---------|
-| Check current branch | `git branch` |
-| Switch branch | `git checkout <branch-name>` |
-| Create & switch branch | `git checkout -b <new-branch>` |
-| Update from develop | `git pull origin develop` |
-| Push to your branch | `git push origin <branch-name>` |
-| See all changes | `git status` |
-| See commit history | `git log --oneline` |
-| Undo unstaged changes | `git checkout -- <file>` |
-| See remote branches | `git branch -r` |
-
----
-
-## ✨ Best Practices
-
-### ✅ DO:
-- Pull from develop before starting work each day
-- Commit small, logical changes frequently
-- Write clear commit messages
-- Test your code before pushing
-- Review teammate's PRs promptly
-- Ask for help when stuck
-
-### ❌ DON'T:
-- Don't commit directly to `main` or `develop`
-- Don't push broken code
-- Don't commit `.env` files or passwords
-- Don't force push (`git push --force`) unless absolutely necessary
-- Don't merge your own PR (let team leader do it)
-- Don't leave PR reviews pending for days
+| 작업 | 명령어 |
+|------|--------|
+| 현재 브랜치 확인 | `git branch` |
+| 브랜치 전환 | `git checkout <branch-name>` |
+| 브랜치 생성 및 전환 | `git checkout -b <new-branch>` |
+| develop에서 업데이트 | `git pull origin develop` |
+| 자신의 브랜치에 푸시 | `git push origin <branch-name>` |
+| 모든 변경사항 보기 | `git status` |
+| 커밋 히스토리 보기 | `git log --oneline` |
+| 스테이징되지 않은 변경사항 취소 | `git checkout -- <file>` |
+| 원격 브랜치 보기 | `git branch -r` |
 
 ---
 
-## 📅 Team Workflow Timeline
+## ✨ 모범 사례
 
-### Week 1: Database (Team Member 1)
+### ✅ 해야 할 것:
+- 매일 작업 시작 전 develop에서 pull하기
+- 작고 논리적인 변경사항을 자주 커밋하기
+- 명확한 커밋 메시지 작성하기
+- 푸시하기 전에 코드 테스트하기
+- 팀원의 PR을 신속하게 검토하기
+- 막혔을 때 도움 요청하기
+
+### ❌ 하지 말아야 할 것:
+- `main` 또는 `develop`에 직접 커밋하지 않기
+- 깨진 코드를 푸시하지 않기
+- `.env` 파일이나 비밀번호를 커밋하지 않기
+- 절대적으로 필요하지 않은 경우 강제 푸시(`git push --force`) 하지 않기
+- 자신의 PR을 병합하지 않기 (팀 리더가 하도록 하기)
+- PR 검토를 며칠 동안 보류하지 않기
+
+---
+
+## 📅 팀 워크플로우 타임라인
+
+### 1주차: 데이터베이스 (팀원 1)
 ```bash
 feature/database → PR → develop
 ```
 
-### Week 2: Service (Team Member 2)
+### 2주차: 서비스 (팀원 2)
 ```bash
-# First, get Team Member 1's work
+# 먼저, 팀원 1의 작업 가져오기
 git checkout develop
 git pull origin develop
 
-# Then work on your branch
+# 그런 다음 자신의 브랜치에서 작업
 git checkout feature/service
-git merge develop  # Get database entities
-# ... do your work ...
+git merge develop  # 데이터베이스 엔티티 가져오기
+# ... 작업 수행 ...
 feature/service → PR → develop
 ```
 
-### Week 3: Controller (Team Member 3)
+### 3주차: 컨트롤러 (팀원 3)
 ```bash
-# Get Team Members 1 & 2's work
+# 팀원 1과 2의 작업 가져오기
 git checkout develop
 git pull origin develop
 
 git checkout feature/controller
-git merge develop  # Get entities and services
-# ... do your work ...
+git merge develop  # 엔티티와 서비스 가져오기
+# ... 작업 수행 ...
 feature/controller → PR → develop
 ```
 
-### Week 4-5: Frontend (Team Members 4 & 5) - Parallel
+### 4-5주차: 프론트엔드 (팀원 4 & 5) - 병렬
 ```bash
-# Both can work simultaneously!
-# Team Member 4:
+# 둘 다 동시에 작업 가능!
+# 팀원 4:
 git checkout feature/frontend-menu
 
-# Team Member 5:
+# 팀원 5:
 git checkout feature/frontend-cart
 ```
 
 ---
 
-## 🎯 Summary
+## 🎯 요약
 
-1. **Team Leader** creates all branches once
-2. **Each team member** works on their assigned branch
-3. **Daily**: Pull from develop, work, commit, push
-4. **When done**: Create Pull Request to develop
-5. **Team reviews** and approves
-6. **Team Leader** merges to develop
-7. **Repeat!**
+1. **팀 리더**가 모든 브랜치를 한 번에 생성
+2. **각 팀원**은 자신에게 할당된 브랜치에서 작업
+3. **매일**: develop에서 pull, 작업, 커밋, 푸시
+4. **완료 시**: develop으로 Pull Request 생성
+5. **팀이 검토**하고 승인
+6. **팀 리더**가 develop으로 병합
+7. **반복!**
 
 ---
 
-## 🆘 Getting Help
+## 🆘 도움 받기
 
-- Check GitHub documentation: https://docs.github.com
-- Ask team members
-- Check the [GitHub Collaboration Guide](./CAFE_KIOSK_GITHUB_COLLABORATION_GUIDE.md)
+- GitHub 문서 확인: https://docs.github.com
+- 팀원에게 문의
+- [GitHub 협업 가이드](./CAFE_KIOSK_GITHUB_COLLABORATION_GUIDE.md) 확인
 
-**Good luck! 🚀**
+**행운을 빕니다! 🚀**

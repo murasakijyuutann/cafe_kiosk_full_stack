@@ -3,7 +3,7 @@
 import styled from "styled-components";
 
 const FooterContainer = styled.footer`
-  background-color: yellow;
+  background-color: #fff9c4;
   color: black;              /* text-white */
   text-align: center;          /* text-center */
   padding: 1rem 0;             /* py-3 */

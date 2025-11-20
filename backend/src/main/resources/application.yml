@@ -5,24 +5,45 @@ server:
       charset: UTF-8
       force: true
       enabled: true
+    session:
+      timeout: 30m
+      cookie:
+        http-only: true
+        secure: false
+        same-site: lax
 
 spring:
+  profiles:
+    active: ${SPRING_PROFILE:dev}  # Use 'dev' profile by default
   datasource:
     url: ${DB_URL:jdbc:mysql://localhost:3306/cafedb?serverTimezone=Asia/Seoul&characterEncoding=UTF-8}
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:password}
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-init-sql: "SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci"
 
   jpa:
     hibernate:
-      ddl-auto: update  # change to 'update' after first run
+      ddl-auto: update  # validate schema with Flyway migrations
     properties:
       hibernate:
-        format_sql: true
-        highlight_sql: true
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: false
+        dialect: org.hibernate.dialect.MySQLDialect
         globally_quoted_identifiers: true
-    show-sql: true
+    show-sql: false
+
+  flyway:
+    enabled: false  # Disable Flyway for now (enable when you have migrations)
+
+  sql:
+    init:
+      mode: never
+      encoding: UTF-8
+      continue-on-error: false
 
   mvc:
     pathmatch:
@@ -55,5 +76,7 @@ springdoc:
 
 logging:
   level:
-    org.hibernate.SQL: debug
-    org.hibernate.orm.jdbc.bind: trace
+    org.hibernate.SQL: info
+    org.hibernate.orm.jdbc.bind: info
+    org.hibernate.tool.schema: error
+    org.springframework.orm.jpa: error
