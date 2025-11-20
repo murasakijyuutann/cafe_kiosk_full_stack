@@ -4,19 +4,21 @@ const API_BASE_URL = "/api";
 export interface Category {
   id: number;
   name: string;
-  order: number;
-  isActive: boolean;
+  description: string;
+  displayOrder: number;
+  createdAt: string;
 }
 
 export interface MenuItem {
   id: number;
-  categoryId: number;
   name: string;
+  description: string;
   price: number;
-  description?: string;
-  imageUrl?: string;
-  isActive: boolean;
-  popularity?: number;
+  imageUrl: string;
+  available: boolean;
+  category: Category;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface OrderItemRequest {

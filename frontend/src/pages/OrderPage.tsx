@@ -1,5 +1,5 @@
 import { useLocation, Navigate } from "react-router-dom";
-import OrderComplete from "../components/oder/OderComplete";
+import OrderComplete from "../components/order/OrderComplete";
 
 const OrderCompletePage = () => {
   const location = useLocation();
