@@ -1,0 +1,30 @@
+[Unit]
+Description=Cafe Kiosk Backend Spring Boot Application
+After=syslog.target network.target
+
+[Service]
+User=ubuntu
+Group=ubuntu
+
+# Environment variables
+EnvironmentFile=/opt/cafe-kiosk/.env
+
+# Java application
+ExecStart=/usr/bin/java -jar -Dspring.profiles.active=prod /opt/cafe-kiosk/backend.jar
+SuccessExitStatus=143
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=cafe-kiosk-backend
+
+# Restart policy
+Restart=always
+RestartSec=10
+
+# Resource limits
+LimitNOFILE=65536
+LimitNPROC=4096
+
+[Install]
+WantedBy=multi-user.target

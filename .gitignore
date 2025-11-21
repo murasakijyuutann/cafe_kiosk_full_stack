@@ -1,5 +1,12 @@
 # Root level gitignore
 
+# Environment files - NEVER commit these!
+.env
+.env.local
+.env.production
+.env.development
+*.env
+
 # IDE
 .vscode/
 .idea/
@@ -12,3 +19,7 @@ Thumbs.db
 
 # Logs
 *.log
+
+# SSH Keys
+*.pem
+*.ppk

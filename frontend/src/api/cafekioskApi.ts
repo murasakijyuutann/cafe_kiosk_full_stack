@@ -1,8 +1,11 @@
 import axios from "axios";
 
-// Base URL uses Vite proxy configuration
+// Use environment variable for API base URL
+const API_BASE_URL = import.meta.env.VITE_API_URL || "/api";
+
+// Base URL uses Vite proxy configuration in dev, direct URL in production
 const api = axios.create({
-  baseURL: "/api",
+  baseURL: API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -40,6 +43,13 @@ export interface CartItem {
 }
 
 // Order interfaces
+export interface OrderItemResponse {
+  menuItemName: string;
+  price: number;
+  quantity: number;
+  subtotal: number;
+}
+
 export interface OrderRequest {
   customerName: string | null;
   items: CartItem[];
@@ -49,6 +59,9 @@ export interface OrderResponse {
   orderNumber: string;
   customerName: string;
   status: string;
+  totalAmount: number;
+  orderedAt: string;
+  items: OrderItemResponse[];
 }
 
 // ===== MENU API =====
@@ -82,7 +95,8 @@ export const getAllCategories = async (): Promise<Category[]> => {
 
 export const getCart = async (): Promise<CartItem[]> => {
   const response = await api.get("/cart");
-  return response.data;
+  // Backend returns {cartItems: [...], cartTotal: number}
+  return response.data.cartItems;
 };
 
 export const addToCart = async (menuItemId: number, quantity: number): Promise<void> => {
@@ -99,10 +113,9 @@ export const clearCart = async (): Promise<void> => {
 
 // FIXED: Backend uses /order/checkout not /orders
 export const createOrder = async (orderRequest: OrderRequest): Promise<OrderResponse> => {
-  // Note: Backend expects cart to be in session, but we'll send items anyway
-  // You may need to modify backend to accept this, or switch to session-based cart
   const response = await api.post("/order/checkout", orderRequest);
-  return response.data;
+  // Backend returns {success: true, order: {...}}
+  return response.data.order;
 };
 
 export const getOrderByNumber = async (orderNumber: string): Promise<OrderResponse> => {

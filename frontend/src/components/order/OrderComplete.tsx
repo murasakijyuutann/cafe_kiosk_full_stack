@@ -1,22 +1,19 @@
-
-
 import { Link } from "react-router-dom";
-
 
 export type OrderStatus = "PENDING" | "PAID" | "CANCELLED" | "FULFILLED";
 
 export interface OrderItem {
   menuItemName: string;
-  price: number;     // 단가
-  quantity: number;  // 수량
-  subtotal: number;  // 소계(= price * quantity)
+  price: number;
+  quantity: number;
+  subtotal: number;
 }
 
 export interface Order {
-  orderNumber: number;
+  orderNumber: string;
   customerName?: string | null;
-  orderedAt: string; // ISO 문자열(예: "2025-11-10T10:20:00Z")
-  status: OrderStatus;
+  orderedAt: string;
+  status: OrderStatus | string;
   items: OrderItem[];
   totalAmount: number;
 }

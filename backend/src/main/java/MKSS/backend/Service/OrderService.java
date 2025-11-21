@@ -66,11 +66,24 @@ public class OrderService {
 		// Save order
 		Order savedOrder = orderRepository.save(order);
 
+		// Create order item responses
+		List<OrderResponse.OrderItemResponse> itemResponses = savedOrder.getOrderItems().stream()
+				.map(item -> OrderResponse.OrderItemResponse.builder()
+						.menuItemName(item.getMenuItem().getName())
+						.price(item.getPrice())
+						.quantity(item.getQuantity())
+						.subtotal(item.getSubtotal())
+						.build())
+				.toList();
+
 		// Create response
 		return OrderResponse.builder()
 				.orderNumber(savedOrder.getOrderNumber())
 				.customerName(savedOrder.getCustomerName())
 				.status(savedOrder.getStatus().toString())
+				.totalAmount(savedOrder.getTotalAmount())
+				.orderedAt(savedOrder.getCreatedAt())
+				.items(itemResponses)
 				.build();
 	}
 
