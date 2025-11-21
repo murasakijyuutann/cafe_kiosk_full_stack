@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import MKSS.backend.Service.CartService;
 import MKSS.backend.Service.OrderService;
@@ -29,13 +30,23 @@ public class OrderController {
 
 	@PostMapping("/checkout")
 	public ResponseEntity<Map<String, Object>> checkout(
-			@RequestParam(required = false) String customerName,
+			@RequestBody(required = false) OrderRequest orderRequest,
 			HttpSession session) {
 
-		List<CartItem> cart = cartService.getCart(session);
+		List<CartItem> cart;
+		String customerName = null;
 
-		if(cart.isEmpty()) {
-			throw new EmptyCartException("Cannot checkout with an empty cart");
+		// Option A: If request has items, use those (client-side cart)
+		if (orderRequest != null && orderRequest.getItems() != null && !orderRequest.getItems().isEmpty()) {
+			cart = orderRequest.getItems();
+			customerName = orderRequest.getCustomerName();
+		}
+		// Fallback: Use session cart (server-side cart)
+		else {
+			cart = cartService.getCart(session);
+			if (cart.isEmpty()) {
+				throw new EmptyCartException("Cannot checkout with an empty cart");
+			}
 		}
 
 		// Create order
@@ -45,6 +56,7 @@ public class OrderController {
 				.build();
 		OrderResponse order = orderService.createOrder(request);
 
+		// Clear session cart if it was used
 		cartService.clearCart(session);
 
 		Map<String, Object> response = new HashMap<>();

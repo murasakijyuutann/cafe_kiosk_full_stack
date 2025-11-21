@@ -2,8 +2,8 @@
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import Cart from "../components/cart/Cart";
-//import { createOrder } from "../api/cafekioskApi";
-import { createOrder } from "../api/createOrderMock";
+import { createOrder } from "../api/cafekioskApi";
+// import { createOrder } from "../api/createOrderMock";
 import { useState } from "react";
 import OrderSuccessAnimation from "../components/anim/OrderSuccessAnimation";
 
@@ -30,7 +30,10 @@ const CartPage = () => {
     setLoading(true);
 
     try {
-      const orderData = {items: cart, };
+      const orderData = {
+        items: cart,
+        customerName: "Guest" // Default customer name for kiosk orders
+      };
      const order = await createOrder(orderData);   
         
         setShowAnim(true);

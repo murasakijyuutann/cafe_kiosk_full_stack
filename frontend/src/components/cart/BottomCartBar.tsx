@@ -1,5 +1,2 @@
-import styled from "styled-components";
-import{link} from "react-router-dom";
-
-
-const Bar =styled 
+// Unused component file - can be removed or completed later
+export {};

@@ -8,7 +8,7 @@ import Home from "./pages/Home";
 
 import CartPage from "./pages/CartPage";
 import OrderCompletePage from "./pages/OrderPage";
-import TestMenu from "./pages/TestMenu";
+import MenuList from "./pages/menu/MenuList";
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               {/* /menu는 하나만 사용 (지금은 TestMenu 기준으로) */}
-              <Route path="/menu" element={<TestMenu />} />
+              <Route path="/menu" element={<MenuList />} />
             
               <Route path="/cart" element={<CartPage />} />
               <Route
