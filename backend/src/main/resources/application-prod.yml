@@ -23,9 +23,9 @@ server:
   servlet:
     session:
       cookie:
-        secure: true  # HTTPS only in production
+        secure: false  # Set to true only when using HTTPS
         http-only: true
-        same-site: strict
+        same-site: lax  # Changed from strict to allow same-site requests
 
 logging:
   level:

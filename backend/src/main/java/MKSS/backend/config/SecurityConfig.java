@@ -51,10 +51,12 @@ public class SecurityConfig {
         if (allowedOrigins != null && !allowedOrigins.isEmpty()) {
             configuration.setAllowedOrigins(Arrays.asList(allowedOrigins.split(",")));
         } else {
-            // Default for development
-            configuration.setAllowedOrigins(Arrays.asList(
-                    "http://localhost:5173",
-                    "http://localhost:3000"));
+            // Default: Allow localhost for dev and common EC2 patterns
+            configuration.setAllowedOriginPatterns(Arrays.asList(
+                    "http://localhost:*",
+                    "http://127.0.0.1:*",
+                    "http://*.compute.amazonaws.com",
+                    "http://*.*.*.*"));  // Allow any IP (for EC2)
         }
         
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
