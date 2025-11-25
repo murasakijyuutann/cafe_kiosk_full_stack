@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Winter = styled.img`
+const Cafe = styled.img`
   width: 100%;
   height: 80vh;
   object-fit: cover;
@@ -9,7 +9,7 @@ const Winter = styled.img`
 const Home = () => {
   return (
     <>
-      <Winter src="../public/images/cafe2.jpg" alt="winter" />
+      <Cafe src="https://cafe-kiosk-images-mjyuu.s3.ap-northeast-2.amazonaws.com/cafe2.jpg" alt="cafe" />
     </>
   );
 };
