@@ -10,7 +10,7 @@
 [![MySQL](https://img.shields.io/badge/MySQL-8.0-blue.svg)](https://www.mysql.com/)
 [![License](https://img.shields.io/badge/License-Educational-yellow.svg)](LICENSE)
 
-[기능](#-주요-기능) • [Getting Started](#-시작하기) • [Documentation](#-문서) • [Team](#-팀-구성) • [Contributing](#-기여하기)
+[주요기능](#-주요-기능) • [시작하기](#-시작하기) • [문서](#-문서) • [팀구성](#-팀-구성) • [기여하기](#-기여하기)
 
 </div>
 
