@@ -330,11 +330,11 @@ cafe_kiosk_full_stack/
 
 ## 🏗️ 시스템 아키텍처
 
-### Production Architecture (AWS)
+### 프로덕션 아키텍처 (AWS)
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                         Internet                             │
+│                         인터넷                               │
 └──────────────────────────┬──────────────────────────────────┘
                            │
                     ┌──────▼──────┐
@@ -346,35 +346,35 @@ cafe_kiosk_full_stack/
           │                │                │
     ┌─────▼─────┐   ┌─────▼──────┐  ┌─────▼──────┐
     │   Nginx   │   │  AWS RDS   │  │  AWS S3    │
-    │  (Port 80)│   │  (MySQL)   │  │  (Images)  │
+    │  (Port 80)│   │  (MySQL)   │  │  (이미지)  │
     └─────┬─────┘   └────────────┘  └────────────┘
           │
     ┌─────▼──────────────┐
-    │  Static Files      │
-    │  (React Build)     │
+    │  정적 파일          │
+    │  (React 빌드)      │
     └────────────────────┘
           │
     ┌─────▼──────────────┐
     │  Spring Boot       │
     │  (Port 8080)       │
     │  - REST API        │
-    │  - Session Mgmt    │
+    │  - 세션 관리       │
     └────────────────────┘
 ```
 
-### Request Flow
+### 요청 흐름
 
-1. **Frontend Request**: User visits `http://EC2-IP` → Nginx serves React static files
-2. **API Request**: Frontend calls `/api/*` → Nginx proxies to Spring Boot (port 8080)
-3. **Database**: Spring Boot queries AWS RDS MySQL
-4. **Images**: Menu images loaded from AWS S3
+1. **프론트엔드 요청**: 사용자가 `http://EC2-IP` 접속 → Nginx가 React 정적 파일 제공
+2. **API 요청**: 프론트엔드가 `/api/*` 호출 → Nginx가 Spring Boot(8080 포트)로 프록시
+3. **데이터베이스**: Spring Boot가 AWS RDS MySQL 쿼리 실행
+4. **이미지**: 메뉴 이미지를 AWS S3에서 로드
 
-### Key Components
+### 주요 구성 요소
 
-- **Nginx**: Web server serving React build + reverse proxy for API
-- **Spring Boot**: Backend API with session-based cart management
-- **AWS RDS**: MySQL database for menu items, orders, categories
-- **AWS S3**: Object storage for menu images
+- **Nginx**: React 빌드 파일을 제공하는 웹 서버 + API 역방향 프록시
+- **Spring Boot**: 세션 기반 장바구니 관리를 포함한 백엔드 API
+- **AWS RDS**: 메뉴 아이템, 주문, 카테고리 데이터를 저장하는 MySQL 데이터베이스
+- **AWS S3**: 메뉴 이미지를 저장하는 객체 스토리지
 
 ---
 
